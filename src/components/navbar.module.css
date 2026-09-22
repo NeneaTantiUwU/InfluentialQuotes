@@ -1,0 +1,146 @@
+.header {
+  border-bottom: 1px solid var(--color-ink);
+  background: var(--color-bg);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 88px;
+}
+
+.logo {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--color-ink);
+}
+
+.logo span {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+}
+
+.searchInput {
+  height: 40px;
+  flex: 1;
+  min-width: 0;
+  max-width: 260px;
+  border: 1px solid var(--color-border);
+  border-right: none;
+  background: var(--color-surface);
+  padding: 0 4px 0 14px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--color-ink);
+  transition: border-color 0.15s ease;
+}
+
+.searchInput::placeholder {
+  color: var(--color-ink-soft);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-ink);
+}
+
+.searchInput:focus + .searchButton {
+  border-color: var(--color-ink);
+}
+
+.searchInput::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.searchButton {
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-left: none;
+  background: var(--color-surface);
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  /* cancels .inner's 32px gap so the button sits flush against the input */
+  margin-left: -32px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.searchButton:hover {
+  color: var(--color-ink);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  margin-left: auto;
+}
+
+.link {
+  position: relative;
+  padding-bottom: 4px;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+  transition: color 0.15s ease;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-ink);
+  transition: width 0.2s ease;
+}
+
+.link:hover {
+  color: var(--color-ink);
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+.active {
+  color: var(--color-ink);
+  font-style: italic;
+}
+
+.active::after {
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 16px 0;
+    row-gap: 14px;
+  }
+
+  .searchInput {
+    order: 3;
+    max-width: none;
+  }
+
+  .searchButton {
+    order: 4;
+  }
+
+  .nav {
+    gap: 24px;
+  }
+}
+

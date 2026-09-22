@@ -1,69 +1,50 @@
-import Image from "next/image";
+
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
+    <>
+      <section className={`container ${styles.hero}`}>
+        <div className={styles.heroLeft}>
+          <span className={styles.eyebrow}>Bine ai venit,</span>
+          <h1 className={styles.title}>
+            Cuvinte care au <em>schimbat</em> lumea
           </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+        </div>
+        <div className={styles.heroRight}>
+          <p className={styles.lead}>
+            Citate Influente e un spațiu dedicat sfatului lăsat în urmă de
+            personalități remarcabile, ale căror cuvinte inspiră.
+          </p>
+          <p className={styles.lead}>
+            Reflecții organizate simplu și plăcut de răsfoit,
+            indiferent dacă cauți o idee pentru azi sau o sursă de inspirație pe
+            termen lung.
           </p>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      <section
+        className={`container ${styles.quoteBlock}`}
+        style={{ "--accent": "var(--color-tehnologie)" } as React.CSSProperties}
+      >
+
+        <blockquote className={styles.featured}>
+          <p>
+            Imaginația este mai importantă decât cunoașterea, căci cunoașterea
+            este limitată, în timp ce imaginația cuprinde întreaga lume.
+          </p>
+          <footer>— Albert Einstein</footer>
+        </blockquote>
+      </section>
+
+      <section className={`container ${styles.categories}`}>
+        <h2 className={styles.sectionTitle}>Răsfoiește, Inspiră-te, Aplică</h2>
+        <p className={styles.sectionLead}>
+          Citatul este o reflecție a realității, iar realitatea nu este una singură, se traduce prin percepții. 
+          Deci fiecare citat reprezintă o percepție a realității.
+        </p>
+      </section>
+    </>
   );
 }

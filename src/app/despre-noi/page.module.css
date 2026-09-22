@@ -1,0 +1,147 @@
+.wrapper {
+  padding: 72px 24px 100px;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 48px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid var(--color-ink);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-ink-soft);
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  margin-bottom: 20px;
+}
+
+.title::after {
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: 20px;
+  background: var(--color-ink);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--color-ink-soft);
+  font-size: 1.05rem;
+  max-width: 620px;
+}
+
+.content p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 3.4rem;
+  line-height: 0.8;
+  padding: 4px 8px 0 0;
+  color: var(--color-ink);
+}
+
+.manifesto {
+  max-width: 640px;
+  margin: 56px 0;
+  padding-left: 24px;
+  border-left: 3px solid var(--color-ink);
+}
+
+.manifesto p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  line-height: 1.35;
+  color: var(--color-ink);
+}
+
+.valuesTitle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.5rem;
+  color: var(--color-ink);
+  margin-bottom: 28px;
+}
+
+.valuesTitle::before {
+  content: "";
+  width: 32px;
+  height: 1px;
+  background: var(--color-ink-soft);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 48px 220px 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 16px;
+  margin: 0 -16px;
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.15s ease;
+}
+
+.rowNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-ink-soft);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+}
+
+.row h3 {
+  font-size: 1.3rem;
+}
+
+.row p {
+  color: var(--color-ink-soft);
+  font-size: 0.98rem;
+}
+
+@media (max-width: 760px) {
+  .top {
+    grid-template-columns: 1fr;
+  }
+
+  .row {
+    grid-template-columns: 32px 1fr;
+    grid-template-areas:
+      "num title"
+      "text text";
+  }
+
+  .rowNumber {
+    grid-area: num;
+  }
+
+  .row h3 {
+    grid-area: title;
+  }
+
+  .row p {
+    grid-area: text;
+  }
+}
