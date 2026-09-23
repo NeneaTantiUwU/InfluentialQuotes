@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { isValidEmail } from "@/lib/auth-validation";
+import { getSiteUrl } from "@/lib/site-url";
 import Modal from "./modal";
 import styles from "./auth-form.module.css";
 
@@ -28,7 +29,7 @@ export default function ForgotPasswordForm() {
     setStatus("loading");
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reseteaza-parola`,
+      redirectTo: `${getSiteUrl()}/reseteaza-parola`,
     });
 
     setStatus("idle");

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { getSiteUrl } from "@/lib/site-url";
 import styles from "./auth-form.module.css";
 
 export default function GoogleAuthButton({ label }: { label: string }) {
@@ -11,7 +12,7 @@ export default function GoogleAuthButton({ label }: { label: string }) {
     setError("");
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: window.location.origin },
+      options: { redirectTo: getSiteUrl() },
     });
 
     if (error) {
