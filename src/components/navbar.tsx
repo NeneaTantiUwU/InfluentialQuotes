@@ -103,6 +103,7 @@ export default function Navbar() {
                 <Link
                   key={category.slug}
                   href={`/citate?category=${category.slug}`}
+                  onClick={(e) => e.currentTarget.blur()}
                   className={styles.dropdownItem}
                 >
                   {category.label}

@@ -57,7 +57,7 @@ export default function RegisterForm() {
       email,
       password,
       options: {
-        data: { username },
+        data: { username, email },
       },
     });
 
