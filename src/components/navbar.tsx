@@ -109,6 +109,24 @@ export default function Navbar() {
               ))}
             </div>
           </div>
+
+          <Link
+            href="/sign-in"
+            className={`${styles.link} ${
+              pathname === "/sign-in" ? styles.active : ""
+            }`}
+          >
+            Autentifică-te
+          </Link>
+
+          <Link
+            href="/sign-up"
+            className={`${styles.link} ${
+              pathname === "/sign-up" ? styles.active : ""
+            }`}
+          >
+            Înregistrează-te
+          </Link>
         </nav>
       </div>
     </header>

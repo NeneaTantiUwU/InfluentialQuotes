@@ -91,6 +91,9 @@
   font-size: 1.02rem;
   font-weight: 500;
   color: var(--color-ink-soft);
+  background: none;
+  border: none;
+  cursor: pointer;
   transition: color 0.15s ease;
 }
 
@@ -185,6 +188,7 @@
   background: var(--color-surface);
   color: var(--color-ink);
 }
+
 
 @media (max-width: 720px) {
   .inner {
