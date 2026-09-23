@@ -73,8 +73,9 @@ export default function Navbar() {
           ))}
 
           <div className={styles.dropdown}>
-            <Link
-              href="/citate"
+            <button
+              type="button"
+              onClick={(e) => e.currentTarget.blur()}
               className={`${styles.link} ${
                 pathname === "/citate" ? styles.active : ""
               }`}
@@ -96,7 +97,7 @@ export default function Navbar() {
                   strokeLinejoin="round"
                 />
               </svg>
-            </Link>
+            </button>
             <div className={styles.dropdownMenu}>
               {categories.map((category) => (
                 <Link

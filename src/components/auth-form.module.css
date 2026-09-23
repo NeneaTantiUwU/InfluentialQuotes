@@ -30,6 +30,36 @@
   border-color: var(--color-ink);
 }
 
+.passwordWrapper {
+  position: relative;
+  display: flex;
+}
+
+.passwordWrapper input {
+  width: 100%;
+  padding-right: 44px;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 44px;
+  width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.eyeButton:hover {
+  color: var(--color-ink);
+}
+
 .submit {
   height: 46px;
   margin-top: 6px;
@@ -60,4 +90,91 @@
 .success {
   font-size: 0.82rem;
   color: var(--color-renastere, #5c7a6e);
+}
+
+.fieldError {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-istorie, #6e2a2a);
+}
+
+.requirements {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+  list-style: none;
+}
+
+.requirements li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.requirements li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.75rem;
+}
+
+.reqMet {
+  color: var(--color-renastere, #5c7a6e);
+}
+
+.reqMet::before {
+  content: "✓";
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.reqUnmet {
+  color: var(--color-istorie, #6e2a2a);
+}
+
+.reqUnmet::before {
+  content: "○";
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+  font-size: 0.82rem;
+  font-style: italic;
+  font-family: var(--font-display);
+  color: var(--color-ink-soft);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.googleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 46px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.googleButton:hover {
+  border-color: var(--color-ink);
+  background: var(--color-surface);
 }

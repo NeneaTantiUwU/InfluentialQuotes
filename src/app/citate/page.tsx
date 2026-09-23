@@ -1,5 +1,8 @@
+import { redirect } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import styles from "./page.module.css";
+
+const DEFAULT_CATEGORY = "history";
 
 type Quote = {
   id: string | number;
@@ -41,16 +44,7 @@ export default async function CitatePage({
   const { category } = await searchParams;
 
   if (!category) {
-    return (
-      <section className={`container ${styles.wrapper}`}>
-        <span className={styles.eyebrow}>Colecția noastră</span>
-        <h1 className={styles.title}>Citate</h1>
-        <p className={styles.empty}>
-          Alege o categorie din meniul &bdquo;Citate&rdquo; pentru a vedea
-          citatele.
-        </p>
-      </section>
-    );
+    redirect(`/citate?category=${DEFAULT_CATEGORY}`);
   }
 
   const { data: quotes, error } = await supabase
