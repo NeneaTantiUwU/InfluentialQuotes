@@ -87,11 +87,6 @@
   color: var(--color-istorie, #6e2a2a);
 }
 
-.success {
-  font-size: 0.82rem;
-  color: var(--color-renastere, #5c7a6e);
-}
-
 .fieldError {
   font-size: 0.78rem;
   font-weight: 500;

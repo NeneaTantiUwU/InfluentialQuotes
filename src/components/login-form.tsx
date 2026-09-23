@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase";
 import { isValidEmail } from "@/lib/auth-validation";
 import GoogleAuthButton from "./google-auth-button";
 import PasswordField from "./password-field";
+import Modal from "./modal";
 import styles from "./auth-form.module.css";
 
 type FieldErrors = {
@@ -20,6 +21,7 @@ export default function LoginForm() {
     "idle"
   );
   const [message, setMessage] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   function validateField(field: keyof FieldErrors, value: string) {
     let error: string | undefined;
@@ -57,7 +59,7 @@ export default function LoginForm() {
     }
 
     setStatus("success");
-    setMessage("Autentificare reușită.");
+    setShowSuccess(true);
   }
 
   return (
@@ -91,11 +93,7 @@ export default function LoginForm() {
           {status === "loading" ? "Se autentifică…" : "Autentifică-te"}
         </button>
 
-        {message && (
-          <p className={status === "error" ? styles.error : styles.success}>
-            {message}
-          </p>
-        )}
+        {message && <p className={styles.error}>{message}</p>}
       </form>
 
       <div className={styles.divider}>
@@ -103,6 +101,14 @@ export default function LoginForm() {
       </div>
 
       <GoogleAuthButton label="Autentifică-te cu Google" />
+
+      <Modal
+        open={showSuccess}
+        onClose={() => setShowSuccess(false)}
+        title="Autentificare reușită"
+      >
+        Te-ai autentificat cu succes. Bine ai revenit!
+      </Modal>
     </>
   );
 }

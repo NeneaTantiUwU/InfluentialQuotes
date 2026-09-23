@@ -10,6 +10,7 @@ import {
 } from "@/lib/auth-validation";
 import GoogleAuthButton from "./google-auth-button";
 import PasswordField from "./password-field";
+import Modal from "./modal";
 import styles from "./auth-form.module.css";
 
 type FieldErrors = {
@@ -26,6 +27,7 @@ export default function RegisterForm() {
     "idle"
   );
   const [message, setMessage] = useState("");
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const passwordChecks = getPasswordChecks(password);
 
@@ -68,7 +70,7 @@ export default function RegisterForm() {
     }
 
     setStatus("success");
-    setMessage("Cont creat. Verifică-ți emailul pentru confirmare.");
+    setShowThankYou(true);
   }
 
   return (
@@ -129,11 +131,7 @@ export default function RegisterForm() {
           {status === "loading" ? "Se creează contul…" : "Înregistrează-te"}
         </button>
 
-        {message && (
-          <p className={status === "error" ? styles.error : styles.success}>
-            {message}
-          </p>
-        )}
+        {message && <p className={styles.error}>{message}</p>}
       </form>
 
       <div className={styles.divider}>
@@ -141,6 +139,16 @@ export default function RegisterForm() {
       </div>
 
       <GoogleAuthButton label="Înregistrează-te cu Google" />
+
+      <Modal
+        open={showThankYou}
+        onClose={() => setShowThankYou(false)}
+        title="Mulțumim!"
+      >
+        Contul tău a fost creat cu succes. Mulțumim că te-ai alăturat
+        comunității Citate Influente! Verifică-ți emailul pentru a-ți
+        confirma contul.
+      </Modal>
     </>
   );
 }
