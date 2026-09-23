@@ -22,3 +22,13 @@ export function isPasswordValid(password: string) {
   const checks = getPasswordChecks(password);
   return checks.length && checks.uppercase && checks.number && checks.special;
 }
+
+const AUTH_ERROR_MESSAGES: Record<string, string> = {
+  "Invalid login credentials": "Email sau parolă incorectă.",
+  "User already registered": "Există deja un cont cu acest email.",
+  "Email not confirmed": "Emailul nu a fost confirmat încă. Verifică-ți inboxul.",
+};
+
+export function translateAuthError(message: string) {
+  return AUTH_ERROR_MESSAGES[message] ?? message;
+}

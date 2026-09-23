@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import {
   isValidEmail,
   isValidUsername,
   isPasswordValid,
   getPasswordChecks,
+  translateAuthError,
 } from "@/lib/auth-validation";
 import GoogleAuthButton from "./google-auth-button";
 import PasswordField from "./password-field";
@@ -18,7 +20,20 @@ type FieldErrors = {
   email?: string;
 };
 
+async function isAvailable(field: "username" | "email", value: string) {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq(field, value)
+    .maybeSingle();
+
+  // If the profiles table isn't set up yet, don't block signup over it.
+  if (error) return true;
+  return !data;
+}
+
 export default function RegisterForm() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,6 +69,32 @@ export default function RegisterForm() {
     if (!validateAll()) return;
 
     setStatus("loading");
+    setMessage("");
+
+    const [usernameAvailable, emailAvailable] = await Promise.all([
+      isAvailable("username", username),
+      isAvailable("email", email),
+    ]);
+
+    let hasConflict = false;
+    if (!usernameAvailable) {
+      setFieldErrors((prev) => ({
+        ...prev,
+        username: "Acest nume de utilizator este deja folosit.",
+      }));
+      hasConflict = true;
+    }
+    if (!emailAvailable) {
+      setFieldErrors((prev) => ({
+        ...prev,
+        email: "Există deja un cont cu acest email.",
+      }));
+      hasConflict = true;
+    }
+    if (hasConflict) {
+      setStatus("idle");
+      return;
+    }
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -65,7 +106,13 @@ export default function RegisterForm() {
 
     if (error) {
       setStatus("error");
-      setMessage(error.message);
+      setMessage(translateAuthError(error.message));
+      if (error.message === "User already registered") {
+        setFieldErrors((prev) => ({
+          ...prev,
+          email: "Există deja un cont cu acest email.",
+        }));
+      }
       return;
     }
 
@@ -142,7 +189,10 @@ export default function RegisterForm() {
 
       <Modal
         open={showThankYou}
-        onClose={() => setShowThankYou(false)}
+        onClose={() => {
+          setShowThankYou(false);
+          router.push("/");
+        }}
         title="Mulțumim!"
       >
         Contul tău a fost creat cu succes. Mulțumim că te-ai alăturat

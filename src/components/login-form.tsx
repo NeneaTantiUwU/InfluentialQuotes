@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
-import { isValidEmail } from "@/lib/auth-validation";
+import { isValidEmail, translateAuthError } from "@/lib/auth-validation";
 import GoogleAuthButton from "./google-auth-button";
 import PasswordField from "./password-field";
 import Modal from "./modal";
@@ -14,6 +15,7 @@ type FieldErrors = {
 };
 
 export default function LoginForm() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -46,6 +48,7 @@ export default function LoginForm() {
     if (!validateAll()) return;
 
     setStatus("loading");
+    setMessage("");
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -54,7 +57,7 @@ export default function LoginForm() {
 
     if (error) {
       setStatus("error");
-      setMessage(error.message);
+      setMessage(translateAuthError(error.message));
       return;
     }
 
@@ -104,7 +107,10 @@ export default function LoginForm() {
 
       <Modal
         open={showSuccess}
-        onClose={() => setShowSuccess(false)}
+        onClose={() => {
+          setShowSuccess(false);
+          router.push("/");
+        }}
         title="Autentificare reușită"
       >
         Te-ai autentificat cu succes. Bine ai revenit!
