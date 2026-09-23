@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { isValidEmail, translateAuthError } from "@/lib/auth-validation";
@@ -91,6 +92,10 @@ export default function LoginForm() {
           }}
           error={fieldErrors.password}
         />
+
+        <Link href="/uitat-parola" className={styles.forgotLink}>
+          Ai uitat parola?
+        </Link>
 
         <button type="submit" className={styles.submit} disabled={status === "loading"}>
           {status === "loading" ? "Se autentifică…" : "Autentifică-te"}

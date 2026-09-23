@@ -1,21 +1,22 @@
 import Link from "next/link";
-import RegisterForm from "@/components/register-form";
+import ForgotPasswordForm from "@/components/forgot-password-form";
 import styles from "@/components/auth-page.module.css";
 
-export default function SignUpPage() {
+export default function ForgotPasswordPage() {
   return (
     <section className={`container ${styles.wrapper}`}>
       <div className={styles.card}>
-        <span className={styles.eyebrow}>Alătură-te,</span>
-        <h1 className={styles.title}>Înregistrează-te</h1>
+        <span className={styles.eyebrow}>Recuperare cont</span>
+        <h1 className={styles.title}>Ai uitat parola?</h1>
         <p className={styles.lead}>
-          Creează-ți un cont pentru a-ți păstra citatele preferate.
+          Introdu adresa de email cu care ești înregistrat și îți trimitem un
+          link pentru resetarea parolei.
         </p>
 
-        <RegisterForm />
+        <ForgotPasswordForm />
 
         <p className={styles.switch}>
-          Ai deja cont?{" "}
+          Ți-ai amintit parola?{" "}
           <Link href="/sign-in" className={styles.switchLink}>
             Autentifică-te
           </Link>

@@ -93,6 +93,20 @@
   color: var(--color-istorie, #6e2a2a);
 }
 
+.forgotLink {
+  align-self: flex-end;
+  margin-top: -12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.forgotLink:hover {
+  color: var(--color-ink);
+}
+
 .requirements {
   display: flex;
   flex-direction: column;
