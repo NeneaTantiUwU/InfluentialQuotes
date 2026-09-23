@@ -7,7 +7,18 @@ import styles from "./navbar.module.css";
 const links = [
   { href: "/", label: "Acasă" },
   { href: "/despre-noi", label: "Despre Noi" },
-  { href: "/citate", label: "Citate" },
+];
+
+const categories = [
+  { slug: "history", label: "Istorie" },
+  { slug: "politics", label: "Politică" },
+  { slug: "economics", label: "Economie" },
+  { slug: "poetry", label: "Poezie" },
+  { slug: "literature", label: "Literatură" },
+  { slug: "philosophy", label: "Filozofie" },
+  { slug: "art", label: "Artă" },
+  { slug: "science", label: "Știință" },
+  { slug: "technology", label: "Tehnologie" },
 ];
 
 export default function Navbar() {
@@ -60,6 +71,44 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+
+          <div className={styles.dropdown}>
+            <Link
+              href="/citate"
+              className={`${styles.link} ${
+                pathname === "/citate" ? styles.active : ""
+              }`}
+            >
+              Citate
+              <svg
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className={styles.chevron}
+              >
+                <path
+                  d="M1 1L5 5L9 1"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
+            <div className={styles.dropdownMenu}>
+              {categories.map((category) => (
+                <Link
+                  key={category.slug}
+                  href={`/citate?category=${category.slug}`}
+                  className={styles.dropdownItem}
+                >
+                  {category.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </nav>
       </div>
     </header>

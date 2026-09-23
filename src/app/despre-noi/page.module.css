@@ -1,12 +1,12 @@
 .wrapper {
-  padding: 72px 24px 100px;
+  padding: 96px 24px 128px;
 }
 
 .top {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  gap: 48px;
-  padding-bottom: 64px;
+  gap: 56px;
+  padding-bottom: 80px;
   border-bottom: 1px solid var(--color-ink);
 }
 
@@ -35,7 +35,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 26px;
   color: var(--color-ink-soft);
   font-size: 1.05rem;
   max-width: 620px;
@@ -53,7 +53,7 @@
 
 .manifesto {
   max-width: 640px;
-  margin: 56px 0;
+  margin: 80px 0;
   padding-left: 24px;
   border-left: 3px solid var(--color-ink);
 }
@@ -72,7 +72,7 @@
   gap: 14px;
   font-size: 1.5rem;
   color: var(--color-ink);
-  margin-bottom: 28px;
+  margin-bottom: 36px;
 }
 
 .valuesTitle::before {
@@ -92,7 +92,7 @@
   grid-template-columns: 48px 220px 1fr;
   align-items: center;
   gap: 24px;
-  padding: 28px 16px;
+  padding: 34px 16px;
   margin: 0 -16px;
   border-bottom: 1px solid var(--color-border);
   transition: background 0.15s ease;
