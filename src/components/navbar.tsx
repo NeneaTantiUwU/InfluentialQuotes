@@ -129,34 +129,46 @@ export default function Navbar() {
             </div>
           </div>
 
-          {isSignedIn && (
-            <Link
-              href="/favorite"
-              className={`${styles.link} ${
-                pathname === "/favorite" ? styles.active : ""
-              }`}
-            >
-              Favorite
-            </Link>
+          {isSignedIn ? (
+            <>
+              <Link
+                href="/favorite"
+                className={`${styles.link} ${
+                  pathname === "/favorite" ? styles.active : ""
+                }`}
+              >
+                Favorite
+              </Link>
+
+              <button
+                type="button"
+                onClick={() => supabase.auth.signOut()}
+                className={styles.link}
+              >
+                Deconectare
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/sign-in"
+                className={`${styles.link} ${
+                  pathname === "/sign-in" ? styles.active : ""
+                }`}
+              >
+                Autentifică-te
+              </Link>
+
+              <Link
+                href="/sign-up"
+                className={`${styles.link} ${
+                  pathname === "/sign-up" ? styles.active : ""
+                }`}
+              >
+                Înregistrează-te
+              </Link>
+            </>
           )}
-
-          <Link
-            href="/sign-in"
-            className={`${styles.link} ${
-              pathname === "/sign-in" ? styles.active : ""
-            }`}
-          >
-            Autentifică-te
-          </Link>
-
-          <Link
-            href="/sign-up"
-            className={`${styles.link} ${
-              pathname === "/sign-up" ? styles.active : ""
-            }`}
-          >
-            Înregistrează-te
-          </Link>
         </nav>
       </div>
     </header>
