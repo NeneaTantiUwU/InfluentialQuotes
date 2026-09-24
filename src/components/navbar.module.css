@@ -25,11 +25,17 @@
   color: var(--color-ink-soft);
 }
 
+.searchForm {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 260px;
+}
+
 .searchInput {
   height: 40px;
   flex: 1;
   min-width: 0;
-  max-width: 260px;
   border: 1px solid var(--color-border);
   border-right: none;
   background: var(--color-surface);
@@ -59,6 +65,7 @@
 
 .searchButton {
   height: 40px;
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -68,8 +75,6 @@
   background: var(--color-surface);
   color: var(--color-ink-soft);
   cursor: pointer;
-  /* cancels .inner's 32px gap so the button sits flush against the input */
-  margin-left: -32px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
@@ -198,13 +203,9 @@
     row-gap: 14px;
   }
 
-  .searchInput {
+  .searchForm {
     order: 3;
     max-width: none;
-  }
-
-  .searchButton {
-    order: 4;
   }
 
   .nav {

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import styles from "./navbar.module.css";
 
@@ -10,6 +10,21 @@ const links = [
   { href: "/", label: "Acasă" },
   { href: "/despre-noi", label: "Despre Noi" },
 ];
+
+const SEARCHABLE_PAGES = [
+  { match: "acasa", href: "/" },
+  { match: "despre noi", href: "/despre-noi" },
+  { match: "citate", href: "/citate" },
+  { match: "favorite", href: "/favorite" },
+];
+
+function normalize(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .trim();
+}
 
 const categories = [
   { slug: "history", label: "Istorie" },
@@ -25,7 +40,23 @@ const categories = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
+  function handleSearch(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const raw = searchValue.trim();
+    if (!raw) return;
+
+    const normalized = normalize(raw);
+    const page = SEARCHABLE_PAGES.find(
+      (p) => p.match.startsWith(normalized) || normalized.startsWith(p.match)
+    );
+
+    router.push(page ? page.href : `/citate?q=${encodeURIComponent(raw)}`);
+    setSearchValue("");
+  }
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -48,9 +79,12 @@ export default function Navbar() {
           Citate<span>Influente</span>
         </Link>
 
+        <form onSubmit={handleSearch} role="search" className={styles.searchForm}>
           <input
             type="search"
             name="q"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
             placeholder="Caută…"
             aria-label="Caută citate"
             className={styles.searchInput}
@@ -75,6 +109,7 @@ export default function Navbar() {
               />
             </svg>
           </button>
+        </form>
 
         <nav className={styles.nav}>
           {links.map((link) => (
