@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import Modal from "./modal";
 import styles from "./auth-page.module.css";
 
 export default function EmailConfirmed() {
+  const router = useRouter();
   const [status, setStatus] = useState<"checking" | "valid" | "invalid">(
     "checking"
   );
@@ -42,7 +44,10 @@ export default function EmailConfirmed() {
   return (
     <Modal
       open={showModal}
-      onClose={() => setShowModal(false)}
+      onClose={() => {
+        setShowModal(false);
+        router.push("/");
+      }}
       title="Email confirmat!"
     >
       Adresa ta de email a fost confirmată cu succes. Contul tău este acum
