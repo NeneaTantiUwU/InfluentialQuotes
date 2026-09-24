@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { isValidEmail, translateAuthError } from "@/lib/auth-validation";
-import GoogleAuthButton from "./google-auth-button";
 import PasswordField from "./password-field";
 import Modal from "./modal";
 import styles from "./auth-form.module.css";
@@ -103,12 +102,6 @@ export default function LoginForm() {
 
         {message && <p className={styles.error}>{message}</p>}
       </form>
-
-      <div className={styles.divider}>
-        <span>sau</span>
-      </div>
-
-      <GoogleAuthButton label="Autentifică-te cu Google" />
 
       <Modal
         open={showSuccess}

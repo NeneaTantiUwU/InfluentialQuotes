@@ -12,7 +12,6 @@ import {
   getPasswordChecks,
   translateAuthError,
 } from "@/lib/auth-validation";
-import GoogleAuthButton from "./google-auth-button";
 import PasswordField from "./password-field";
 import Modal from "./modal";
 import styles from "./auth-form.module.css";
@@ -188,12 +187,6 @@ export default function RegisterForm() {
 
         {message && <p className={styles.error}>{message}</p>}
       </form>
-
-      <div className={styles.divider}>
-        <span>sau</span>
-      </div>
-
-      <GoogleAuthButton label="Înregistrează-te cu Google" />
 
       <Modal
         open={showThankYou}
