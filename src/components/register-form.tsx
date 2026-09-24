@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { getSiteUrl } from "@/lib/site-url";
 import {
   isValidEmail,
   isKnownEmailDomain,
@@ -107,6 +108,7 @@ export default function RegisterForm() {
       password,
       options: {
         data: { username, email },
+        emailRedirectTo: `${getSiteUrl()}/email-confirmat`,
       },
     });
 
