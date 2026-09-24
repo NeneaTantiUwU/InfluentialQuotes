@@ -42,6 +42,13 @@
   font-size: 1.1rem;
 }
 
+.emptyLink {
+  color: var(--color-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -104,9 +111,38 @@
 
 .author {
   padding-top: 18px;
+  padding-right: 36px;
   border-top: 1px solid var(--color-border);
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.95rem;
   color: var(--color-ink-soft);
+}
+
+.heart {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.heart:hover {
+  color: var(--color-istorie);
+}
+
+.heart:active {
+  transform: scale(0.9);
+}
+
+.heart[aria-pressed="true"] {
+  color: var(--color-istorie);
 }

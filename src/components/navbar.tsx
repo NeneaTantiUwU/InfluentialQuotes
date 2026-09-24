@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 import styles from "./navbar.module.css";
 
 const links = [
@@ -23,6 +25,21 @@ const categories = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setIsSignedIn(!!data.session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsSignedIn(!!session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -111,6 +128,17 @@ export default function Navbar() {
               ))}
             </div>
           </div>
+
+          {isSignedIn && (
+            <Link
+              href="/favorite"
+              className={`${styles.link} ${
+                pathname === "/favorite" ? styles.active : ""
+              }`}
+            >
+              Favorite
+            </Link>
+          )}
 
           <Link
             href="/sign-in"
