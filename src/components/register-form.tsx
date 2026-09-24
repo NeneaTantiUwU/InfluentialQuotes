@@ -197,8 +197,7 @@ export default function RegisterForm() {
         title="Mulțumim!"
       >
         Contul tău a fost creat cu succes. Mulțumim că te-ai alăturat
-        comunității Citate Influente! Verifică-ți emailul pentru a-ți
-        confirma contul.
+        comunității Citate Influente!
       </Modal>
     </>
   );
