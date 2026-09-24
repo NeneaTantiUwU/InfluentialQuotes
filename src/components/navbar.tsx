@@ -16,6 +16,8 @@ const SEARCHABLE_PAGES = [
   { match: "despre noi", href: "/despre-noi" },
   { match: "citate", href: "/citate" },
   { match: "favorite", href: "/favorite" },
+  { match: "autentificare", href: "/sign-in" },
+  { match: "inregistrare", href: "/sign-up" },
 ];
 
 function normalize(value: string) {
