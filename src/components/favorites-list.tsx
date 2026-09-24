@@ -18,7 +18,6 @@ export default function FavoritesList() {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [removingId, setRemovingId] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
-  const [debugInfo, setDebugInfo] = useState<string>("");
 
   useEffect(() => {
     let active = true;
@@ -32,10 +31,6 @@ export default function FavoritesList() {
         .order("created_at", { ascending: false });
 
       if (!active) return;
-
-      setDebugInfo(
-        JSON.stringify({ uid, error, data }, null, 2)
-      );
 
       if (error) {
         console.error("Failed to load favorites:", error.message);
@@ -115,24 +110,10 @@ export default function FavoritesList() {
 
   if (quotes.length === 0) {
     return (
-      <>
-        <p className={styles.empty}>
-          Nu ai încă niciun citat favorit. Adaugă unul apăsând pe inimioară din
-          pagina Citate.
-        </p>
-        <pre
-          style={{
-            whiteSpace: "pre-wrap",
-            fontSize: "0.75rem",
-            marginTop: "24px",
-            padding: "16px",
-            border: "1px dashed var(--color-border)",
-            color: "var(--color-ink-soft)",
-          }}
-        >
-          DEBUG: {debugInfo}
-        </pre>
-      </>
+      <p className={styles.empty}>
+        Nu ai încă niciun citat favorit. Adaugă unul apăsând pe inimioară din
+        pagina Citate.
+      </p>
     );
   }
 
