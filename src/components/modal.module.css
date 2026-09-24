@@ -1,3 +1,23 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -7,6 +27,7 @@
   padding: 24px;
   background: rgba(28, 26, 23, 0.55);
   z-index: 100;
+  animation: fade-in 0.2s ease both;
 }
 
 .dialog {
@@ -15,6 +36,7 @@
   padding: 40px 36px;
   background: var(--color-bg);
   border: 1px solid var(--color-ink);
+  animation: scale-in 0.25s ease both;
 }
 
 .title {

@@ -1,3 +1,14 @@
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .wrapper {
   padding: 72px 24px 100px;
 }
@@ -47,6 +58,32 @@
   border: 1px solid var(--color-border);
   border-top: 3px solid var(--color-ink);
   box-shadow: 0 1px 3px rgba(28, 26, 23, 0.05);
+  animation: fade-slide-up 0.5s ease both;
+}
+
+.card:nth-child(1) {
+  animation-delay: 0.03s;
+}
+.card:nth-child(2) {
+  animation-delay: 0.08s;
+}
+.card:nth-child(3) {
+  animation-delay: 0.13s;
+}
+.card:nth-child(4) {
+  animation-delay: 0.18s;
+}
+.card:nth-child(5) {
+  animation-delay: 0.23s;
+}
+.card:nth-child(6) {
+  animation-delay: 0.28s;
+}
+.card:nth-child(7) {
+  animation-delay: 0.33s;
+}
+.card:nth-child(n + 8) {
+  animation-delay: 0.38s;
 }
 
 .category {
