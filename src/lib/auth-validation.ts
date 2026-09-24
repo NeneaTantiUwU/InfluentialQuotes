@@ -1,8 +1,26 @@
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const USERNAME_REGEX = /^[a-zA-Z0-9_]{3,20}$/;
 
+const KNOWN_EMAIL_DOMAINS = [
+  "gmail.com",
+  "yahoo.com",
+  "outlook.com",
+  "hotmail.com",
+  "icloud.com",
+  "live.com",
+  "msn.com",
+  "aol.com",
+  "protonmail.com",
+  "yandex.com",
+];
+
 export function isValidEmail(email: string) {
   return EMAIL_REGEX.test(email);
+}
+
+export function isKnownEmailDomain(email: string) {
+  const domain = email.split("@")[1]?.toLowerCase();
+  return !!domain && KNOWN_EMAIL_DOMAINS.includes(domain);
 }
 
 export function isValidUsername(username: string) {

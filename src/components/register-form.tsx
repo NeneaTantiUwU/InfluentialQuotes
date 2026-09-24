@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import {
   isValidEmail,
+  isKnownEmailDomain,
   isValidUsername,
   isPasswordValid,
   getPasswordChecks,
@@ -51,8 +52,13 @@ export default function RegisterForm() {
     if (field === "username" && !isValidUsername(value)) {
       error = "3-20 caractere: litere, cifre sau underscore.";
     }
-    if (field === "email" && !isValidEmail(value)) {
-      error = "Adresă invalidă. Format așteptat: nume@mail.extensie.";
+    if (field === "email") {
+      if (!isValidEmail(value)) {
+        error = "Adresă invalidă. Format așteptat: nume@mail.extensie.";
+      } else if (!isKnownEmailDomain(value)) {
+        error =
+          "Folosește un furnizor cunoscut (ex: gmail.com, yahoo.com, outlook.com).";
+      }
     }
     setFieldErrors((prev) => ({ ...prev, [field]: error }));
     return !error;
@@ -142,7 +148,7 @@ export default function RegisterForm() {
         <label className={styles.field}>
           <span>Email</span>
           <input
-            placeholder="Setați un mail (ex: nume@mail.extensie)"
+            placeholder="Setați un mail (ex: nume@gmail.com)"
             type="email"
             value={email}
             onChange={(e) => {
