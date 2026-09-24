@@ -24,13 +24,19 @@ export default function FavoritesList() {
 
     async function loadFavorites(uid: string) {
       setStatus("loading");
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("favorites")
         .select("quote_id, quotes(id, text, author, category)")
         .eq("user_id", uid)
         .order("created_at", { ascending: false });
 
       if (!active) return;
+
+      if (error) {
+        console.error("Failed to load favorites:", error.message);
+        setStatus("ready");
+        return;
+      }
 
       const rows = (data ?? []) as unknown as FavoriteRow[];
       setQuotes(rows.map((row) => row.quotes).filter((q): q is Quote => !!q));
@@ -71,13 +77,18 @@ export default function FavoritesList() {
     if (!userId || removingId) return;
     setRemovingId(quoteId);
 
-    await supabase
+    const { error } = await supabase
       .from("favorites")
       .delete()
       .eq("user_id", userId)
       .eq("quote_id", quoteId);
 
-    setQuotes((prev) => prev.filter((q) => q.id !== quoteId));
+    if (error) {
+      console.error("Failed to remove favorite:", error.message);
+    } else {
+      setQuotes((prev) => prev.filter((q) => q.id !== quoteId));
+    }
+
     setRemovingId(null);
   }
 

@@ -14,7 +14,7 @@ export default function QuotesGrid({ quotes }: { quotes: Quote[] }) {
     let active = true;
 
     async function loadFavorites(uid: string) {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("favorites")
         .select("quote_id")
         .eq("user_id", uid)
@@ -22,6 +22,11 @@ export default function QuotesGrid({ quotes }: { quotes: Quote[] }) {
           "quote_id",
           quotes.map((q) => q.id)
         );
+
+      if (error) {
+        console.error("Failed to load favorites:", error.message);
+        return;
+      }
 
       if (active && data) {
         setFavorites(new Set(data.map((row) => row.quote_id as string)));
@@ -59,21 +64,31 @@ export default function QuotesGrid({ quotes }: { quotes: Quote[] }) {
     setPendingId(quoteId);
 
     if (favorites.has(quoteId)) {
-      await supabase
+      const { error } = await supabase
         .from("favorites")
         .delete()
         .eq("user_id", userId)
         .eq("quote_id", quoteId);
-      setFavorites((prev) => {
-        const next = new Set(prev);
-        next.delete(quoteId);
-        return next;
-      });
+
+      if (error) {
+        console.error("Failed to remove favorite:", error.message);
+      } else {
+        setFavorites((prev) => {
+          const next = new Set(prev);
+          next.delete(quoteId);
+          return next;
+        });
+      }
     } else {
-      await supabase
+      const { error } = await supabase
         .from("favorites")
         .insert({ user_id: userId, quote_id: quoteId });
-      setFavorites((prev) => new Set(prev).add(quoteId));
+
+      if (error) {
+        console.error("Failed to add favorite:", error.message);
+      } else {
+        setFavorites((prev) => new Set(prev).add(quoteId));
+      }
     }
 
     setPendingId(null);
