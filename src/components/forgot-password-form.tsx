@@ -60,7 +60,7 @@ export default function ForgotPasswordForm() {
         </label>
 
         <button type="submit" className={styles.submit} disabled={status === "loading"}>
-          {status === "loading" ? "Se trimite…" : "Trimite link de resetare"}
+          {status === "loading" ? "Se trimite…" : "Resetează-ți parola"}
         </button>
       </form>
 

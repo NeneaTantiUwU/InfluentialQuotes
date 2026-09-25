@@ -8,9 +8,16 @@ type ModalProps = {
   onClose: () => void;
   title: string;
   children: React.ReactNode;
+  closeLabel?: string;
 };
 
-export default function Modal({ open, onClose, title, children }: ModalProps) {
+export default function Modal({
+  open,
+  onClose,
+  title,
+  children,
+  closeLabel = "Închide",
+}: ModalProps) {
   useEffect(() => {
     if (!open) return;
 
@@ -42,7 +49,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
         </h2>
         <div className={styles.body}>{children}</div>
         <button type="button" onClick={onClose} className={styles.close}>
-          Închide
+          {closeLabel}
         </button>
       </div>
     </div>

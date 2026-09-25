@@ -105,6 +105,7 @@ export default function ResetPasswordForm() {
           router.push("/sign-in");
         }}
         title="Parolă schimbată"
+        closeLabel="Autentifică-te"
       >
         Parola ta a fost actualizată cu succes. Te poți autentifica acum cu
         noua parolă.

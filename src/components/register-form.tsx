@@ -192,12 +192,12 @@ export default function RegisterForm() {
         open={showThankYou}
         onClose={() => {
           setShowThankYou(false);
-          router.push("/");
+          router.push("/sign-in");
         }}
         title="Mulțumim!"
+        closeLabel="Autentifică-te"
       >
-        Contul tău a fost creat cu succes. Mulțumim că te-ai alăturat
-        comunității Citate Influente!
+        Cont creat cu succes!
       </Modal>
     </>
   );
