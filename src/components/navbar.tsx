@@ -18,6 +18,7 @@ const SEARCHABLE_PAGES = [
   { match: "favorite", href: "/favorite" },
   { match: "autentificare", href: "/sign-in" },
   { match: "inregistrare", href: "/sign-up" },
+  { match: "schimba parola", href: "/schimba-parola" },
 ];
 
 function normalize(value: string) {
@@ -175,6 +176,15 @@ export default function Navbar() {
                 }`}
               >
                 Favorite
+              </Link>
+
+              <Link
+                href="/schimba-parola"
+                className={`${styles.link} ${
+                  pathname === "/schimba-parola" ? styles.active : ""
+                }`}
+              >
+                Schimbă parola
               </Link>
 
               <button
