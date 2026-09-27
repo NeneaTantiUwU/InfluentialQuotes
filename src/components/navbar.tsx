@@ -67,12 +67,22 @@ export default function Navbar() {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      // A password-recovery link establishes a real session so
+      // updateUser() can work, but that's not a real login — don't
+      // let it flip the whole site into "signed in" mode.
+      if (event === "PASSWORD_RECOVERY") return;
       setIsSignedIn(!!session);
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // Belt-and-suspenders: even if a session slips through on this page
+  // (e.g. it was already in storage before this effect ran), never show
+  // the site as "signed in" here — this page is only for setting a new
+  // password, not for granting site access.
+  const showSignedIn = isSignedIn && pathname !== "/reseteaza-parola";
 
   return (
     <header className={styles.header}>
@@ -166,7 +176,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          {isSignedIn ? (
+          {showSignedIn ? (
             <>
               <Link
                 href="/favorite"

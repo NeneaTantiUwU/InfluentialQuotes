@@ -49,6 +49,9 @@ export default function ResetPasswordForm() {
       return;
     }
 
+    // The recovery link only creates a session so updateUser() can run —
+    // sign it out immediately so the user has to log in for real afterward.
+    await supabase.auth.signOut();
     setShowSuccess(true);
   }
 
